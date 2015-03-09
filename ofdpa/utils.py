@@ -68,6 +68,9 @@ class Utils():
         elif (table_name == "acl"):
             return TABLE_ACL
 
+        elif (table_name == "all"):
+            return 0xff 
+
         else:
             raise Exception("Wrong table name", table_name)
 
@@ -91,7 +94,22 @@ class Utils():
             return dp.ofproto.OFPFC_DELETE_STRICT
 
         else:
-            raise Exception("Wrong command", cmd)
+            raise Exception("Wrong flow command", cmd)
+
+    @staticmethod
+    def get_group_mod_command(dp, cmd):
+        #
+        if(cmd == "add"):
+            return dp.ofproto.OFPGC_ADD
+       
+        elif(cmd == "mod"):
+            return dp.ofproto.OFPGC_MODIFY
+
+        elif(cmd == "del"):
+            return dp.ofproto.OFPGC_DELETE
+
+        else:
+            raise Exception("Wrong group command", cmd)
 
     @staticmethod
     def get_mod_group(dp, group):

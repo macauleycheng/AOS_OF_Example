@@ -62,6 +62,12 @@ class ConfigParser():
         @staticmethod
         def get_buckets_config(config):
             return config["buckets"]
+			
+        @staticmethod
+        def get_priority(config):
+            if "priority" in config.keys():
+                return config["priority"]
+            return 0				
 
         '''
         @staticmethod

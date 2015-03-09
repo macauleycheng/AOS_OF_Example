@@ -67,20 +67,14 @@ class StartScript(app_manager.RyuApp):
                     mod_config = ConfigParser.get_flow_mod(config)
                     mod = Mods.create_flow_mod(dp, mod_config)
                     #
-                elif (type == "flow_del"):
-                    mod_config = ConfigParser.get_flow_del(config)
-                    mod = Mods.delete_flow_mod(dp, mod_config)
-                    #
                 elif (type == "group_mod"):
                     #
                     mod_config = ConfigParser.get_group_mod(config)
                     mod = Mods.create_group_mod(dp, mod_config)
                     #
-                elif (type == "group_del"):
-                    #
-                    mod_config = ConfigParser.get_group_del(config)
-                    mod = Mods.delete_group_mod(dp, mod_config)
-
+                else:
+                    print "no such type %s" % type				
+                    return;
             print "mod len: %i" % sys.getsizeof(mod)
             dp.send_msg(mod)
 

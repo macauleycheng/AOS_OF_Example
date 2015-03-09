@@ -39,6 +39,8 @@ class Mods():
         instr_config = ConfigParser.get_instr_config(config)
         instructions = Instructions.create_instructions(dp, instr_config)
         #
+		
+        priority = ConfigParser.get_priority(config)		
 
         mod = dp.ofproto_parser.OFPFlowMod (
             dp,
@@ -59,6 +61,25 @@ class Mods():
         return mod
 
     @staticmethod
+    def delete_flow_mod(dp, config):
+        #
+        mod = dp.ofproto_parser.OFPFlowMod (
+            dp,
+            cookie = 0,
+            cookie_mask = 0,
+            table_id = Utils.get_table(config["table"]),
+            command = Utils.get_mod_command(dp, config["cmd"]),
+            idle_timeout = 0,
+            hard_timeout = 0,
+            priority = 0,
+            buffer_id = 0,
+            out_port = Utils.get_mod_port(dp, config["port"]),
+            out_group = Utils.get_mod_group(dp, config["group"]),
+            flags=0
+        )
+        return mod
+
+    @staticmethod
     def create_group_mod(dp, config):
         #
         buckets_config= ConfigParser.get_buckets_config(config)
@@ -67,10 +88,21 @@ class Mods():
 
         mod = dp.ofproto_parser.OFPGroupMod(
             dp,
-            Utils.get_mod_command(dp, config["cmd"]),
+            Utils.get_group_mod_command(dp, config["cmd"]),
             Utils.get_mod_type(dp, config["type"]),
             Utils.get_mod_group(dp, config["group_id"]),
             buckets
+            )
+        return mod
+
+    @staticmethod
+    def delete_group_mod(dp, config):
+        #
+        mod = dp.ofproto_parser.OFPGroupMod(
+            dp,
+            Utils.get_group_mod_command(dp, config["cmd"]),
+            Utils.get_mod_type(dp, config["type"]),
+            Utils.get_mod_group(dp, config["group_id"])
             )
         return mod
 

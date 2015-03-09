@@ -1,12 +1,13 @@
 
 {
-"group_del":
+"group_mod":
         {
-        "_name" : "group_to_port1_vlan10_tagged",
-        "_description" :"group_to_port1_vlan10_tagged",
+        "_name" : "Delete all groups",
+        "_description" :"Delete All groups",
         "#comments": "Comments",
         "cmd" : "del",
         "type" : "indirect",
-        "group_id" : "0xfffffffc"
+        "group_id" : "0xfffffffc",
+		"buckets":[]
         }
 }

@@ -1,6 +1,6 @@
 
 {
-"flow_del":
+"flow_mod":
         {
         "_name" : "add_port1_to_vlan10",
         "_description" :"add_port1_to_vlan10",
@@ -9,6 +9,10 @@
         "cmd" : "del",
         "mask" : "0",
         "port" : "any",
-        "group" : "any"
+        "group" : "any",
+        "match":
+            {
+            },
+        "instructions":[]
         }
 }
