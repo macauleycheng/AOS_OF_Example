@@ -6,7 +6,7 @@
         "del_all_group.json",
 		"group_a0001_to_port1.json",
 		"group_a0002_to_port2.json",
-		"group_2000000a_l2_flood.json",
+		"group_400a0001_l2_flood.json",
 		"table10_add_port1_to_vlan10.json",
 		"table10_add_port2_to_vlan10.json",
 		"table50_add_client1_on_port1.json",
