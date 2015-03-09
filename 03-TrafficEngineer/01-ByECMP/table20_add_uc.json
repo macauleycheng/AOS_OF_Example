@@ -1,0 +1,31 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "termination mac 1",
+        "_description" :"Description",
+        "#comments": "Comments",
+        "table" : "mac",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "eth_type" : "0x800",
+            "vlan_vid" : "10",
+            "eth_dst":"00:01:02:03:04:05",
+            "eth_dst_mask":"ff:ff:ff:ff:ff:ff"
+            },
+        "instructions":
+            [
+                {
+                "goto":
+                    {
+                    "#tables":"port,vlan,mac,unicast,multicast,bridging,acl",
+                    "table":"unicast"
+                    }
+                }
+            ]
+        }
+}

@@ -1,0 +1,71 @@
+
+{
+"group_mod":
+        {
+        "_name" : "add ecmp",
+        "_description" :"Description",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "select",
+        "group_id" : "0x70000001",
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "group":
+                            {
+                            "group_id":"0x20000001"
+                            }
+                        }
+                    ]
+                },
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "group":
+                            {
+                            "group_id":"0x20000002"
+                            }
+                        }
+                    ]
+                },
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "group":
+                            {
+                            "group_id":"0x20000003"
+                            }
+                        }
+                    ]
+                },
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "group":
+                            {
+                            "group_id":"0x20000004"
+                            }
+                        }
+                    ]
+                    }
+            ]
+        }
+}
