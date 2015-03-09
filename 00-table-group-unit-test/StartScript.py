@@ -29,6 +29,7 @@ from ofdpa.config_parser import ConfigParser
 from ofdpa.mods import Mods
 #
 import sys
+import inspect, os
 #
 class StartScript(app_manager.RyuApp):
 
@@ -49,11 +50,11 @@ class StartScript(app_manager.RyuApp):
     def packet_in_handler(self, ev):
         print "=Event PacketIn="
 
-    def send_msg(self, dp, processing_set):
+    def send_msg(self, dp, dir, processing_set):
         # 
         for filename in processing_set:
             #
-            full_filename = "./"+filename
+            full_filename = dir +"/"+filename
             print "------------------------------------------------------------"
             print "processing file: %s" %  full_filename
             print "------------------------------------------------------------"
@@ -84,5 +85,6 @@ class StartScript(app_manager.RyuApp):
             dp.send_msg(mod)
 
     def get_working_set(self, dp):
-        working_set = ConfigParser.get_working_set("./working_set.json")
-        self.send_msg(dp, working_set)
+        dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))	
+        working_set = ConfigParser.get_working_set(dir +"/working_set.json")
+        self.send_msg(dp, dir, working_set)
