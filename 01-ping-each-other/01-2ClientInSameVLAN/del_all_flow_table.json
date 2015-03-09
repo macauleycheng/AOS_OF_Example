@@ -1,0 +1,14 @@
+
+{
+"flow_del":
+        {
+        "_name" : "add_port1_to_vlan10",
+        "_description" :"add_port1_to_vlan10",
+        "#comments": "Comments",
+        "table" : "all",
+        "cmd" : "del",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any"
+        }
+}

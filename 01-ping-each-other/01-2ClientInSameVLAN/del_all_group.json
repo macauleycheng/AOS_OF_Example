@@ -1,0 +1,12 @@
+
+{
+"group_del":
+        {
+        "_name" : "group_to_port1_vlan10_tagged",
+        "_description" :"group_to_port1_vlan10_tagged",
+        "#comments": "Comments",
+        "cmd" : "del",
+        "type" : "indirect",
+        "group_id" : "0xfffffffc"
+        }
+}
