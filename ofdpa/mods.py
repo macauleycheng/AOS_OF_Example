@@ -39,8 +39,6 @@ class Mods():
         instr_config = ConfigParser.get_instr_config(config)
         instructions = Instructions.create_instructions(dp, instr_config)
         #
-		
-        priority = ConfigParser.get_priority(config)		
 
         mod = dp.ofproto_parser.OFPFlowMod (
             dp,
@@ -50,7 +48,7 @@ class Mods():
             command = Utils.get_mod_command(dp, config["cmd"]),
             idle_timeout = 0,
             hard_timeout = 0,
-            priority = 0,
+            priority = ConfigParser.get_priority(config),
             buffer_id = 0,
             out_port = Utils.get_mod_port(dp, config["port"]),
             out_group = Utils.get_mod_group(dp, config["group"]),
