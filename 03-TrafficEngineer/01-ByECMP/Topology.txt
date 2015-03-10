@@ -1,0 +1,27 @@
+
+  Input ---------> Output
+        ________
+       |   		|	
+---P1--+		+-P5
+       |		|
+   P2--+		+-P6
+	   |  		|
+   P3--+		+-P7
+	   |		|
+   P4--+		+-P8
+	   |		|
+	   |________|
+
+*
+Input ports: P1, P2, P3, P4
+Output Ports: P5, P6, P7, P8
+
+*
+Input packets: 
+    DA=00:01:02:03:04:05 (untag or VID=10)
+	DIP=10.1.1.x/24
+	
+* 
+ECMP load balancing traffic to IP subset 10.1.1.x/24 to ports P5, P6, P7 and P8 (with VID=11, DA, SA replaced)
+
+
