@@ -1,0 +1,8 @@
+
+(vlan 10)            (vlan 10)
+(000000000011)       (000000000022)
+client1  -1        2- client 2
+            Switch   
+client3  -3        4- client 4
+(000000000033)       (000000000044)
+(vlan 20)            (vlan 20)

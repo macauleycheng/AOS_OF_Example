@@ -1,0 +1,44 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "table10_add_port2 to vlan 1 tagged",
+        "_description" :"add_port2",
+        "#comments": "Comments",
+        "table" : "vlan",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "in_port" : "2",
+            "vlan_vid": "1,0x1fff"
+            },
+        "instructions":
+            [
+			    {
+                "apply":
+                    [
+                        {
+                        "actions":
+                            [
+                            {
+                            "set_field":
+                                {
+                                "vlan_vid":"1"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                },			
+                {
+                "goto":
+                    {
+                    "table":"mac"
+                    }
+                }
+            ]
+        }
+}
