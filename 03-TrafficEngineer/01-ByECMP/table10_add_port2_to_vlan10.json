@@ -1,0 +1,29 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "vlan1",
+        "_description" :"Description",
+        "#comments": "Comments",
+        "table" : "vlan",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "in_port" : "2",
+            "vlan_vid" : "10"
+            },
+        "instructions":
+            [
+                {
+                "goto":
+                    {
+                    "#tables":"port,vlan,mac,unicast,multicast,bridging,acl",
+                    "table":"mac"
+                    }
+                }
+            ]
+        }
+}
