@@ -53,7 +53,10 @@ class Actions():
 
                 elif (key == "push_vlan"):
                     actions.append(Actions.action_push_vlan(dp,val))
-
+					
+                elif (key == "pop_vlan"):
+                    actions.append(Actions.action_pop_vlan(dp, val))
+					
                 elif (key == "push_mpls"):
                     actions.append(Actions.action_push_mpls(dp,val))
 
@@ -114,6 +117,10 @@ class Actions():
     @staticmethod
     def action_push_vlan(dp,conf):
         return dp.ofproto_parser.OFPActionPushVlan()
+
+    @staticmethod
+    def action_pop_vlan(dp,conf):
+        return dp.ofproto_parser.OFPActionPopVlan()
 
     @staticmethod
     def action_push_mpls(dp,conf):
