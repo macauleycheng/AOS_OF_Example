@@ -18,7 +18,7 @@ Output Ports: P5, P6, P7, P8
 
 *
 Input packets: 
-    DA=00:01:02:03:04:05 (untag or VID=10)
+    DA=00:01:02:03:04:05 (tagged with VID=10)
     DIP=10.1.1.x/24
     
 * 
