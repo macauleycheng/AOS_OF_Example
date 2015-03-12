@@ -1,10 +1,3 @@
-#!/usr/bin/python
+#!/bin/bash
 
-import os
-
-cwd=os.getcwd()
-os.unsetenv('PYTHONPAHT')
-os.environ['PYTHONPATH']=cwd
-os.putenv('PYTHONPATH', cwd)
-
-
+export PYTHONPATH=$(pwd)

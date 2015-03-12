@@ -20,3 +20,4 @@ Usage example: (on AOS_OF_Example folder)
 ryu-manager 01-ping-each-other/01-2ClientInSameVLAN/StartScript.py
 
 NOTE: If it can't find ofdpa module, please set the PYTHONPATH to the AOS_OF_Example
+      or "source set_python_path.sh"
