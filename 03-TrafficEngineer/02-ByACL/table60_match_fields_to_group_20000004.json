@@ -1,0 +1,48 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "acl",
+        "_description" :"Description",
+        "#comments": "Comments",
+        "table" : "acl",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "vlan_vid" : "10",
+
+            "eth_src":"00:00:00:00:00:00",
+            "eth_dst":"00:01:02:03:04:05",
+            "eth_type" : "0x800",
+
+            "ipv4_src":"0.0.0.0",
+            "ipv4_dst":"10.1.1.2",
+            "ip_proto":"6",
+
+            "tcp_src" : "9999",
+            "tcp_dst" : "0"
+            },
+        "instructions":
+            [
+                {
+                "write":
+                    [
+                        {
+                        "actions":
+                            [
+                            {
+                            "group":
+                                {
+                                "group_id":"0x20000004"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+}
