@@ -3,7 +3,9 @@
     "working_set":
         [
         "del_all_group.json",
-        "del_all_flow_table.json"
+        "del_all_flow_table.json",
+		"group_a0001_to_port1.json",
+		"table50_add_client1_on_port1.json"
         ]
 }
 

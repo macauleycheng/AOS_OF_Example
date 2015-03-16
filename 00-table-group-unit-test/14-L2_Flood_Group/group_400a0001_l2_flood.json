@@ -1,0 +1,44 @@
+
+{
+"group_mod":
+        {
+        "_name" : "group_400a0001",
+        "_description" :"L2_interface flood group",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "all",
+        "group_id" : "0x400a0001",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                            {
+                            "group":
+                                {
+                                "group_id":"0xa0001"
+                                }
+                            }
+                    ]
+                },
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                            {
+                            "group":
+                                {
+                                "group_id":"0xa0002"
+                                }
+                            }
+                    ]
+                }				
+            ]
+        }
+}
