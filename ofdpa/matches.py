@@ -125,7 +125,7 @@ class Matches():
                 matches.set_udp_src(int(val))
 
             elif (key == "udp_dst"):
-                matches.set_tcp_dst(int(val))
+                matches.set_udp_dst(int(val))
 
             elif (key == "sctp_src"):
                  matches.set_sctp_src(int(val))
