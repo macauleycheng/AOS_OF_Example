@@ -2,8 +2,8 @@
 {
     "working_set":
         [
-        "del_all_group.json",
-        "del_all_flow_table.json"
+        "del_all_flow_table.json",
+		"table20_port1_vlan1_mac_00_00_00_11_33_55.json"
         ]
 }
 
