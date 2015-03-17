@@ -17,22 +17,22 @@ Input port: P1
 Output Port: P8
 
 *
-Input packets
-    SA=00:00:00:00:00:00
+Input packets (to port 1)
+    SA=00:00:00:00:00:01
     DA=00:01:02:03:04:05 
     VID=10 (tagged)
+    VLAN tag priority=2
+    SIP=10.1.2.1
     DIP=10.1.1.2
+    IP DSCP=36
     TCP src port=9999
     TCP dest port=0
     
 * 
-Output packets (route the above input packets to different VLAN with DA and SA being replaced)
+Output packets (route the above input packets to port 8 with DA/SA/VID being replaced)
     SA=00:01:02:03:04:05
     DA=00:00:00:00:00:08
     VID=11 (tagged)
-    DIP=10.1.1.2
-    TCP src port=9999
-    TCP dest port=0
 
 
 

@@ -12,15 +12,19 @@
         "group" : "any",
         "match":
             {
-            "vlan_vid" : "10",
+            "in_port" : "1",
 
-            "eth_src":"00:00:00:00:00:00",
-            "eth_dst":"00:01:02:03:04:05",
+            "vlan_vid" : "10, 0x1fff",
+            "vlan_pcp" : "2",
+
+            "eth_src": "00:00:00:00:00:01",
+            "eth_dst": "00:01:02:03:04:05",
             "eth_type" : "0x800",
 
-            "ipv4_src":"0.0.0.0",
-            "ipv4_dst":"10.1.1.2",
-            "ip_proto":"6",
+            "ipv4_src": "10.1.2.1",
+            "ipv4_dst": "10.1.1.2",
+            "ip_dscp" : "36",
+            "ip_proto": "6",
 
             "tcp_src" : "9999",
             "tcp_dst" : "0"
@@ -36,7 +40,7 @@
                             {
                             "group":
                                 {
-                                "group_id":"0x20000004"
+                                "group_id":"0x70000001"
                                 }
                             }
                             ]
