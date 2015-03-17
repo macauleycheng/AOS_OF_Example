@@ -91,7 +91,7 @@ class Matches():
                 matches.set_vlan_pcp(int(val))
 
             elif (key == "ip_dscp"):
-                raise Exception("Wrong match name:", key)
+                matches.set_ip_dscp(int(val))
 
             elif (key == "ip_ecn"):
                 raise Exception("Wrong match name:", key)
@@ -128,16 +128,16 @@ class Matches():
                 matches.set_tcp_dst(int(val))
 
             elif (key == "sctp_src"):
-                raise Exception("Wrong match name:", key)
+                 matches.set_sctp_src(int(val))
 
             elif (key == "sctp_dst"):
-                raise Exception("Wrong match name:", key)
+                 matches.set_sctp_dst(int(val))
 
             elif (key == "icmpv4_type"):
-                raise Exception("Wrong match name:", key)
+                 matches.set_icmpv4_type(int(val))            
 
             elif (key == "icmpv4_code"):
-                raise Exception("Wrong match name:", key)
+                 matches.set_icmpv4_code(int(val))   
 
             elif (key == "arp_op"):
                 raise Exception("Wrong match name:", key)
@@ -155,19 +155,37 @@ class Matches():
                 raise Exception("Wrong match name:", key)
 
             elif (key == "ipv6_src"):
-                raise Exception("Wrong match name:", key)
-
+                matches.set_ipv6_src(Matches.ipv6_to_int(val))
+                
+            elif (key == "ipv6_src_mask"):
+                ipv6_src_int = Matches.ipv6_to_int(config["ipv6_src"])
+                mask_int = Matches.ipv6_to_int(mask)
+                match.set_ipv6_src_masked(ipv6_src_int, mask_int)             
+                
             elif (key == "ipv6_dst"):
-                raise Exception("Wrong match name:", key)
+                matches.set_ipv6_dst(Matches.ipv6_to_int(val))
 
+            elif (key == "ipv6_dst_mask"):
+                ipv6_dst_int = Matches.ipv6_to_int(config["ipv6_dst"])
+                mask_int = Matches.ipv6_to_int(mask)
+                match.set_ipv6_dst_masked(ipv6_dst_int, mask_int) 
+                
             elif (key == "ipv6_flabel"):
-                raise Exception("Wrong match name:", key)
-
+                lst = val.split(',')
+                flabel_int = Utils.to_int(lst[0])                
+                if(len(lst) == 1):
+                    matches.set_ipv6_flabel(flabel_int)
+                elif(len(lst) == 2):
+                    flabel_mask_int = Utils.to_int(lst[1])
+                    matches.set_ipv6_flabel_masked(flabel_int, flabel_mask_int)
+                else:
+                    print key, ": only two values allowed, key ignored"            
+                 
             elif (key == "icmpv6_type"):
-                raise Exception("Wrong match name:", key)
+                 matches.set_icmpv6_type(int(val))   
 
             elif (key == "icmpv6_code"):
-                raise Exception("Wrong match name:", key)
+                 matches.set_icmpv6_code(int(val))   
 
             elif (key == "ipv6_nd_target"):
                 raise Exception("Wrong match name:", key)
@@ -211,8 +229,12 @@ class Matches():
             b = int(b)
             i = (i << 8) | b
         return i
-
-
+        
+    @staticmethod
+    def ipv6_to_int(string):
+        ip = string.split(':')
+        assert len(ip) == 8
+        return [int(x, 16) for x in ip]
 
     @staticmethod
     def ipv4_text_to_int(ip_text):
