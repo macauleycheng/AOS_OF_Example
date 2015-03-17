@@ -1,0 +1,49 @@
+
+{
+"group_mod":
+        {
+        "_name" : "group_20000003_set_fields_to_group_b0007",
+        "_description" :"Description",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "indirect",
+        "group_id" : "0x20000003",
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "set_field":
+                            {
+                            "vlan_vid":"11"
+                            }
+                        },
+                        {
+                        "set_field":
+                            {
+                            "eth_dst":"00:00:00:00:00:07",
+                            "eth_dst_mask":"ff:ff:ff:ff:ff:ff"
+                            }
+                        },
+                        {
+                        "set_field":
+                            {
+                            "eth_src":"00:01:02:03:04:05",
+                            "eth_src_mask":"ff:ff:ff:ff:ff:ff"
+                            }
+                        },
+                        {
+                        "group":
+                            {
+                            "group_id":"0xb0007"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+}
