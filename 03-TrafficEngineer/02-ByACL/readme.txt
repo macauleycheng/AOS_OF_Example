@@ -20,25 +20,24 @@
         output: a single port (tagged)
 
 04-Case:
-   match: tunnel ID
-   action:
-        output: a single port (tagged)
-
-
-05-Case:
-   match: SCTP src port, SCTP dest port
-   action:
-        output: a single port (tagged)
-
-06-Case:
    match:  ICMPv4 type, ICMPv4 code
    action:
-       output: a single port (tagged)
+       output: a single port (untagged)
 
-07-Case:
+05-Case:
    match:  ICMPv6 type, ICMPv6 code
    action:
-       output: a single port (tagged)
+       output: a single port (untagged)
+
+06-Case:
+   match: SCTP src port, SCTP dest port
+   action:
+        output: a single port (untagged)
+
+07-Case:
+   match: tunnel ID
+   action:
+        output: a single port (untagged)
 
 
 

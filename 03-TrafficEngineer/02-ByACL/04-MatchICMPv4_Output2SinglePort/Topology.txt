@@ -1,0 +1,34 @@
+
+  Input ---------> Output
+        ________
+       |        |   
+   P1--+        |
+       |        |
+       |        |
+       |        |
+       |        |
+       |        |
+       |        +-P8
+       |        |
+       |________|
+
+*
+Input port: P1
+Output Port: P8
+
+*
+Input packets (to port 1)
+    VID=10 (tagged)
+    EtherType=0x0800
+    SIP=10.1.1.1
+    DIP=10.1.1.2
+    IP Protocol=1
+    ICMPv4 type=9
+    ICMPv4 code=16
+    
+* 
+Output packets to port 8 (untagged)
+
+
+
+

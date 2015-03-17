@@ -1,0 +1,37 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "acl",
+        "_description" :"Description",
+        "#comments": "Comments",
+        "table" : "acl",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "tunnel_id": "1"
+            },
+        "instructions":
+            [
+                {
+                "write":
+                    [
+                        {
+                        "actions":
+                            [
+                            {
+                            "group":
+                                {
+                                "group_id":"0xa0008"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+}

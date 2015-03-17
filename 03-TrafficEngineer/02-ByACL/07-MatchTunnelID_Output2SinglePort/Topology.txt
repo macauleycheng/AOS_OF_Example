@@ -1,0 +1,21 @@
+
+  Input ---------> Output
+         ________
+        |        |   
+  VXLAN-+        |
+        |        |
+        |        |
+        |        |
+        |        |
+        |        |
+        |        +-P8
+        |        |
+        |________|
+
+*
+Input port: VXLAN tunnel id=1
+Output Port: P8
+
+
+
+

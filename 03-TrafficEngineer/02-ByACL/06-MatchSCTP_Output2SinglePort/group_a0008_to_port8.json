@@ -1,0 +1,33 @@
+
+{
+"group_mod":
+        {
+        "_name" : "group_a0008_to_port8",
+        "_description" :"Description",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "indirect",
+        "group_id" : "0xa0008",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "output":
+                            {
+                            "port":"8"
+                            }
+                        },
+                        {
+			"pop_vlan":{}	
+                        }
+                    ]
+                }
+            ]
+        }
+}
