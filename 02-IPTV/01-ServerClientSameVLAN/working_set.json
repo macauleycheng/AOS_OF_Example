@@ -3,7 +3,15 @@
     "working_set":
         [
         "del_all_group.json",
-        "del_all_flow_table.json"
+        "del_all_flow_table.json",
+		"group_a0001_to_port1.json",
+		"group_a0002_to_port2.json",
+		"group_300a0002_l2_mcast.json",	
+		"table10_add_port1_to_vlan10.json",
+		"table10_add_port2_to_vlan10.json",
+		"table10_add_port1_to_vlan10_untagged.json",
+		"table10_add_port2_to_vlan10_untagged.json",			
+		"table50_add_l2mcast_flow.json"
         ]
 }
 
