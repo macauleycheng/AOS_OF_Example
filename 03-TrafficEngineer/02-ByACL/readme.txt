@@ -12,7 +12,7 @@
         change: DA, SA, VID
         output: an ECMP interface
 
-03-Case: (offer the max number of matching fields -- ipv6)
+03-Case: (offer the max number of matching fields -- ipv6) (DA/SA matches can be supported on some products)
    match: input physical port, EtherType, Tagged VID, DIPv6, SIPv6,
           IP protocol, UDP src port, UDP dest port, IP DSCP, Flow Label
    action:
@@ -22,7 +22,6 @@
 04-Case:
    match: tunnel ID
    action:
-        change: DA, SA, VID
         output: a single port (tagged)
 
 
@@ -34,7 +33,7 @@
 06-Case:
    match:  ICMPv4 type, ICMPv4 code
    action:
-       output: an ECMP interface
+       output: a single port (tagged)
 
 07-Case:
    match:  ICMPv6 type, ICMPv6 code
