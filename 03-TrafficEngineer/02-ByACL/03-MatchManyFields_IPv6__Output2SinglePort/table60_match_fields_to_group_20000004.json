@@ -15,19 +15,17 @@
             "in_port" : "1",
 
             "vlan_vid" : "10, 0x1fff",
-            "vlan_pcp" : "2",
 
-            "eth_src": "00:00:00:00:00:01",
-            "eth_dst": "00:01:02:03:04:05",
-            "eth_type" : "0x800",
+            "eth_type" : "0x86dd",
 
-            "ipv4_src": "10.1.2.1",
-            "ipv4_dst": "10.1.1.2",
+            "ipv6_src": "2001:db8:bd05:1d2:288a:1fc0:1:10ee",
+            "ipv6_dst": "e9e8:9ea5:7d67:82cc:ca54:1fc0:2d24:f038",
             "ip_dscp" : "36",
-            "ip_proto": "6",
+            "ip_proto": "17",
+            "ipv6_flabel": "0xc5384, 0xffff0",
 
-            "tcp_src" : "9999",
-            "tcp_dst" : "0"
+            "udp_src" : "9999",
+            "udp_dst" : "0"
             },
         "instructions":
             [
@@ -40,7 +38,7 @@
                             {
                             "group":
                                 {
-                                "group_id":"0x70000001"
+                                "group_id":"0x20000004"
                                 }
                             }
                             ]
