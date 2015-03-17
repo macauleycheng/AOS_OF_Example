@@ -3,7 +3,8 @@
     "working_set":
         [
         "del_all_group.json",
-        "del_all_flow_table.json"
+		"group_20002_to_port2.json",
+		"group_20020002_port2.json"
         ]
 }
 
