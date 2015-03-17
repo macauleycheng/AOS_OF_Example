@@ -1,0 +1,48 @@
+
+{
+"group_mod":
+        {
+        "_name" : "group_30020002_to_port2",
+        "_description" :"",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "indirect",
+        "group_id" : "0x20020002",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+					    {
+                            "set_field":
+                            {
+                                "vlan_vid":"2"
+                            }
+						},
+					    {
+                            "set_field":
+                            {
+                                "eth_dst":"00:00:00:00:00:02"
+                            }
+						},	
+						{
+                            "set_field":
+                            {
+                                "eth_src":"00:00:00:22:44:66"
+                            }
+						},	
+                        {
+                            "group":
+                            {
+                                "group_id":"0x20002"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+}

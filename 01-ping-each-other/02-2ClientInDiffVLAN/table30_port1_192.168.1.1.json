@@ -1,0 +1,44 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "table40_port1_192.168.1.1",
+        "_description" :"table40_port1_192.168.1.1",
+        "#comments": "Comments",
+        "table" : "unicast",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+			"eth_type": "0x0800",
+			"ipv4_dst": "192.168.1.1"
+            },
+        "instructions":
+            [		
+			    {
+                    "write":
+                    [
+                        {
+                        "actions":
+                            [
+                            {
+                            "group":
+                                {
+                                "group_id":"0x20010001"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                },
+                {
+                "goto":
+                    {
+                    "table":"acl"
+                    }
+                }
+            ]
+        }
+}
