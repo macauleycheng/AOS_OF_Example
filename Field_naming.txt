@@ -1,0 +1,12 @@
+tables:
+"port,vlan,mac,unicast,multicast,bridging,acl"
+
+matches:
+in_port, in_phy_port, metadata, eth_dst, eth_dst_mask, eth_src, eth_src_mask,
+eth_type, vlan_vid, vlan_pcp, ip_dscp, ip_ecn, ip_proto, ipv4_src,
+ipv4_src_mask, ipv4_dst, ipv4_dst_mask, tcp_src, tcp_dst,
+udp_src, udp_dst, sctp_src, sctp_dst, icmpv4_type, icmpv4_code, 
+arp_op, arp_spa, arp_tpa, arp_sha, arp_tha,
+ipv6_src,ipv6_src_mask, ipv6_dst, ipv6_dst_mask,ipv6_flabel, 
+icmpv6_type, icmpv6_code, ipv6_nd_target, ipv6_nd_sll, ipv6_nd_tll,
+mpls_label, mpls_tc, mpls_bos, pbb_isid, tunnel_id, ipv6_exthdr
