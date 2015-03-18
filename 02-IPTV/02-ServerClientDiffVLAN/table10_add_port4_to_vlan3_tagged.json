@@ -1,0 +1,44 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "table10_add_port4_to_vlan3 tagged",
+        "_description" :"add_port4_to_vlan3",
+        "#comments": "Comments",
+        "table" : "vlan",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "in_port" : "4",
+            "vlan_vid": "3, 0x1fff"
+            },
+        "instructions":
+            [
+			    {
+                "apply":
+                    [
+                        {
+                        "actions":
+                            [
+                            {
+                            "set_field":
+                                {
+                                "vlan_vid":"3"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                },		
+                {
+                "goto":
+                    {
+                    "table":"mac"
+                    }
+                }
+            ]
+        }
+}

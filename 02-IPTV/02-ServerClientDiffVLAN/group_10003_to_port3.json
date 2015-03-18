@@ -1,0 +1,33 @@
+
+{
+"group_mod":
+        {
+        "_name" : "group_10003_to_port3",
+        "_description" :"Send to Port 3",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "indirect",
+        "group_id" : "0x10003",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "output":
+                            {
+                            "port":"3"
+                            }
+                        },
+						{
+						"pop_vlan":{}	
+						}
+                    ]
+                }
+            ]
+        }
+}

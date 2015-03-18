@@ -1,0 +1,42 @@
+
+{
+"group_mod":
+        {
+        "_name" : "group_50020004_to_port4",
+        "_description" :"L3 Interface group",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "indirect",
+        "group_id" : "0x50030004",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+					    {
+                            "set_field":
+                            {
+                                "vlan_vid":"3"
+                            }
+						},
+						{
+                            "set_field":
+                            {
+                                "eth_src":"00:00:00:11:33:55"
+                            }
+						},	
+                        {
+                            "group":
+                            {
+                                "group_id":"0x30004"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+}

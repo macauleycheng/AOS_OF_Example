@@ -1,0 +1,8 @@
+
+(Port.VLAN)
+
+1.1 ---DUT---2.2
+3.1       ---4.3
+
+
+packet inject from 1.1

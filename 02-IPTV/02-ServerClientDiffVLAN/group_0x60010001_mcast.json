@@ -1,0 +1,59 @@
+
+{
+"group_mod":
+        {
+        "_name" : "group_0x60010001_mcast",
+        "_description" :"",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "all",
+        "group_id" : "0x60010001",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                            "group":
+                            {
+                                "group_id":"0x50020002"
+                            }
+                        }					
+                    ]
+                },
+				{
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                            "group":
+                            {
+                                "group_id":"0x50030004"
+                            }
+                        }					
+                    ]								
+				},				
+				{
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+
+                        {
+                            "group":
+                            {
+                                "group_id":"0x10003"
+                            }
+                        }						
+                    ]				
+				}
+            ]
+        }
+}

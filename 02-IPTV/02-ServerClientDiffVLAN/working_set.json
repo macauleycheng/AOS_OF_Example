@@ -2,8 +2,25 @@
 {
     "working_set":
         [
+        "del_all_flow_table.json",		
         "del_all_group.json",
-        "del_all_flow_table.json"
+        "group_10001_to_port1.json",
+		"group_10003_to_port3.json",
+		"group_20002_to_port2.json",
+		"group_30004_to_port4.json",
+		"group_50020002_port2.json",
+		"group_50030004_port4.json",
+		"group_0x60010001_mcast.json",
+        "table10_add_port1_to_vlan1_tagged.json",
+        "table10_add_port1_to_vlan1_untagged.json",
+		"table10_add_port2_to_vlan2_tagged.json",
+		"table10_add_port2_to_vlan2_untagged.json",
+		"table10_add_port3_to_vlan1_tagged.json",
+		"table10_add_port3_to_vlan1_untagged.json",
+		"table10_add_port4_to_vlan3_tagged.json",
+		"table10_add_port4_to_vlan3_untagged.json",
+		"table20_mcast_01_00_5e_01_01_01.json",
+		"table30_mcast_224.1.1.1.json"
         ]
 }
 

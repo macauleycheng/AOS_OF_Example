@@ -1,0 +1,29 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "table20_mcast_01_00_5e_01_01_01",
+        "_description" :"table20_mcast_01_00_5e_01_01_01",
+        "#comments": "Comments",
+        "table" : "mac",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+			"eth_type": "0x0800",
+			"eth_dst" : "01:00:5e:00:00:00",
+			"eth_dst_mask": "ff:ff:ff:80:00:00"
+            },
+        "instructions":
+            [			
+                {
+                "goto":
+                    {
+                    "table":"multicast"
+                    }
+                }
+            ]
+        }
+}
