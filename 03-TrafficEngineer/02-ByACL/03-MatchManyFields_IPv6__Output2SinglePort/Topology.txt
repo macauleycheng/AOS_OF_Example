@@ -1,0 +1,41 @@
+
+  Input ---------> Output
+        ________
+       |        |   
+   P1--+        |
+       |        |
+       |        |
+       |        |
+       |        |
+       |        |
+       |        +-P8
+       |        |
+       |________|
+
+*
+Input port: P1
+Output Port: P8
+
+*
+Input packets (to port 1)
+    SA=00:00:00:00:00:01
+    DA=00:01:02:03:04:05 
+    VID=10 (tagged)
+    ETH_TYPE=0x86dd
+    SIPv6=2001:db8:bd05:1d2:288a:1fc0:1:10ee
+    DIPv6=e9e8:9ea5:7d67:82cc:ca54:1fc0:2d24:f038
+    IP DSCP=36
+    IP Protocol=17
+    IPv6 Flow Label=0xc5384 (mask=0xffff0)
+    UDP src port=9999
+    UDP dest port=0
+    
+* 
+Output packets (route the above input packets to port 8 with DA/SA/VID being replaced)
+    SA=00:01:02:03:04:05
+    DA=00:00:00:00:00:08
+    VID=11 (tagged)
+
+
+
+

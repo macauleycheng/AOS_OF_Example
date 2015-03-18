@@ -22,9 +22,11 @@ Input packets (to port 1)
     DA=00:01:02:03:04:05 
     VID=10 (tagged)
     VLAN tag priority=2
+    EtherType=0x0800
     SIP=10.1.2.1
     DIP=10.1.1.2
     IP DSCP=36
+    IP Protocal=6
     TCP src port=9999
     TCP dest port=0
     
