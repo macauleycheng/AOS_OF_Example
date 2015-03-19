@@ -13,14 +13,29 @@
         "match":
             {
             "in_port" : "1",
-            "vlan_vid" : "10"
+            "vlan_vid" : "0, 0xfff"
             },
         "instructions":
             [
                 {
+                "apply":
+                    [
+                        {
+                        "actions":
+                            [
+                            {
+                            "set_field":
+                                {
+                                "vlan_vid":"10"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                },
+                {
                 "goto":
                     {
-                    "#tables":"port,vlan,mac,unicast,multicast,bridging,acl",
                     "table":"mac"
                     }
                 }

@@ -24,7 +24,7 @@
    action:
        output: a single port (untagged)
 
-05-Case:
+05-Case: (ICMPv6 type/code matches can NOT be supported on some products)
    match:  ICMPv6 type, ICMPv6 code
    action:
        output: a single port (untagged)
@@ -34,7 +34,7 @@
    action:
         output: a single port (untagged)
 
-07-Case:
+07-Case: (need to configure the switch properly for VxLAN first)
    match: tunnel ID
    action:
         output: a single port (untagged)
