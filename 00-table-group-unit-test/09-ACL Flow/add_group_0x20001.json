@@ -1,0 +1,31 @@
+
+{
+"group_mod":
+        {
+        "_name" : "add_group_0x20001",
+        "_description" :"Send to Port 1",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "indirect",
+        "group_id" : "0x20001",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "output":
+                            {
+                            "port":"1"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+}
+

@@ -1,0 +1,45 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "add_table60",
+        "_description" :"add_table60",
+        "#comments": "Comments",
+        "table" : "acl",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "eth_type" : "0x0800",
+            "ipv4_dst": "192.168.2.2"
+            },
+        "instructions":
+            [
+                {
+                "write":
+                    [
+                        {
+                        "actions":
+                            [
+
+			    
+
+
+                            {
+                            "group":
+                                {
+                                "group_id":"0x20001"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                }
+                
+                
+            ]
+        }
+}
+
