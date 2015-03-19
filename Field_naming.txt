@@ -10,3 +10,8 @@ arp_op, arp_spa, arp_tpa, arp_sha, arp_tha,
 ipv6_src,ipv6_src_mask, ipv6_dst, ipv6_dst_mask,ipv6_flabel, 
 icmpv6_type, icmpv6_code, ipv6_nd_target, ipv6_nd_sll, ipv6_nd_tll,
 mpls_label, mpls_tc, mpls_bos, pbb_isid, tunnel_id, ipv6_exthdr
+
+
+actions:
+set_field, group, output, push_vlan, pop_vlan, push_mpls, push_pbb, pop,
+copy_ttl, dec_ttl, qos
