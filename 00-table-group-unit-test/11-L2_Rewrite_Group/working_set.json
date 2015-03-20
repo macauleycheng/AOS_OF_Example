@@ -3,7 +3,9 @@
     "working_set":
         [
         "del_all_group.json",
-        "del_all_flow_table.json"
+        "del_all_flow_table.json",
+"add_group_0x20001.json",
+"add_L2_rewrite_group_0x10000001.json"
         ]
 }
 

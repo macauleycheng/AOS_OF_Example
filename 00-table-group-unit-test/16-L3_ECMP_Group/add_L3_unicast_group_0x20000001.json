@@ -1,0 +1,42 @@
+
+{
+"group_mod":
+        {
+        "_name" : "add_L3_unicast_group_0x20000001.json",
+        "_description" :"add_L3_unicast_group_0x20000001.json",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "indirect",
+        "group_id" : "0x20000001",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [
+                        {
+                        "set_field":
+                            {
+                            "eth_src":"00:00:00:22:33:55"
+                            }
+                        },
+			{
+                        "set_field":
+                            {
+                            "vlan_vid":"2"
+                            }
+                        },
+			{
+                        "group":
+                            {
+                            "group_id":"0x20001"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+}

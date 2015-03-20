@@ -1,0 +1,30 @@
+
+{
+"group_mod":
+        {
+        "_name" : "add_L2_mcast_group_0x30020001.json",
+        "_description" :"add_L2_mcast_group_0x30020001.json",
+        "#comments": "Comments",
+        "cmd" : "add",
+        "type" : "all",
+        "group_id" : "0x30020001",
+
+        "buckets":
+            [
+                {
+                "weight" : "0",
+                "watch_port":"any",
+                "watch_group":"any",
+                "actions":
+                    [                     
+			{
+                        "group":
+                            {
+                            "group_id":"0x20001"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+}
