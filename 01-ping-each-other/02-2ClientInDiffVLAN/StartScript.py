@@ -31,6 +31,11 @@ from ofdpa.mods import Mods
 import sys
 import inspect, os
 #
+from ryu.lib.packet import packet
+from ryu.lib.packet import ethernet
+from ryu.lib.packet import vlan
+from ryu.lib.packet import arp
+#
 class StartScript(app_manager.RyuApp):
 
     _CONTEXTS = {'dpset': dpset.DPSet}
@@ -45,11 +50,26 @@ class StartScript(app_manager.RyuApp):
         print "dpid: %i" % ev.dp.id
         if ev.enter:
             self.get_working_set(ev.dp)
+      
+        self.set_trap_arp_to_controller(ev.dp)
 
+			
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def packet_in_handler(self, ev):
         print "=Event PacketIn="
+        msg = ev.msg
+        datapath = msg.datapath
+        ofproto = datapath.ofproto
+        parser = datapath.ofproto_parser
 
+        in_port = msg.match['in_port']
+        pkt = packet.Packet(msg.data)
+        eth = pkt.get_protocols(ethernet.ethernet)[0]
+        #print("packet in %s %s, %d, %s, msg: %s")%(eth.src, eth.dst, eth.ethertype, in_port, msg.data)    
+        if(eth.ethertype == 0x0806):
+		    self.packet_out_arp_reply(msg, in_port)
+		
+		
     def send_msg(self, dp, dir, processing_set):
         # 
         for filename in processing_set:
@@ -78,6 +98,92 @@ class StartScript(app_manager.RyuApp):
             print "mod len: %i" % sys.getsizeof(mod)
             dp.send_msg(mod)
 
+    def packet_out_arp_reply(self, msg, in_port):
+        datapath = msg.datapath
+        ofproto = datapath.ofproto
+        parser = datapath.ofproto_parser
+        #unpack received packet
+        pkt = packet.Packet(msg.data)
+        eth = pkt.get_protocols(ethernet.ethernet)[0]
+        vlan_h = pkt.get_protocols(vlan.vlan)
+        arp_pkt = pkt.get_protocols(arp.arp)[0]		
+
+        print "arp op %x, src mac %s, src_ip %s, dst mac %s, dst_ip %s"%(arp_pkt.proto, arp_pkt.src_mac, arp_pkt.src_ip, arp_pkt.dst_mac, arp_pkt.dst_ip)
+        if arp_pkt.opcode != arp.ARP_REQUEST:
+            print "NOT arp request"
+
+        #filter specify arp
+        if (arp_pkt.src_ip == "0.0.0.0"):
+            print "retunr because src_ip is 0.0.0.0"
+            return;	
+        if (arp_pkt.dst_mac == "ff:ff:ff:ff:ff:ff"):
+            print "retunr because dst_mac is ff:ff:ff:ff:ff:ff"		
+            return;
+        #filter gratitious arp			
+        if (arp_pkt.src_ip == arp_pkt.dst_ip):
+            print "retunr because gratitious arp"
+            return; 
+        '''
+        if(arp_pkt.dst_ip != "192.168.2.254" || arp_pkt.dst_ip!="192.168.1.254"):
+            print "not gateway IP %s"%arp_pkt.dst_ip
+            return;
+        '''
+        if(in_port == 1):		
+            pkt_src_mac ="00:00:00:11:33:55"
+        elif(in_port == 2):
+            pkt_src_mac="00:00:00:22:44:66"		
+        else:
+            print "retunr because in port %d is not 1 and 2"%in_port
+            return	
+		
+        #pack arp reply
+        pkt_out = packet.Packet()
+		#encode ethernet
+        eth_out= ethernet.ethernet()
+        eth_out.ethertype=0x0806
+        eth_out.src=pkt_src_mac
+        eth_out.dst=eth.src
+        pkt_out.add_protocol(eth_out)
+      
+        #encode arp
+        arp_reply=arp.arp()
+        arp_reply.proto=arp_pkt.proto
+        arp_reply.opcode=2		
+        arp_reply.dst_mac=arp_pkt.src_mac
+        arp_reply.dst_ip=arp_pkt.src_ip
+        arp_reply.src_ip=arp_pkt.dst_ip
+        arp_reply.src_mac=pkt_src_mac
+        pkt_out.add_protocol(arp_reply)
+		
+        pkt_out.serialize()
+
+        print "send out ARP replys"
+
+        actions = [parser.OFPActionOutput(in_port, ofproto.OFPCML_NO_BUFFER)]
+        out = parser.OFPPacketOut(datapath=datapath,
+                                  buffer_id=ofproto.OFP_NO_BUFFER ,
+                                  in_port=ofproto.OFPP_CONTROLLER,
+                                  actions=actions, data=pkt_out.data)	
+        datapath.send_msg(out)	 	
+	
+	
+
+    def add_flow(self, datapath , table_id, priority , match , inst):
+       ofproto = datapath.ofproto
+       parser = datapath.ofproto_parser
+       mod = parser.OFPFlowMod(datapath=datapath, table_id=table_id, priority=priority ,
+                               match=match , instructions=inst)
+       datapath.send_msg(mod)
+	   
+    def set_trap_arp_to_controller(self, dp):
+        ofproto = dp.ofproto
+        parser = dp.ofproto_parser	
+        #ARP/ARP-reply goto controller BY ACL
+        match = parser.OFPMatch(eth_type=0x0806)
+        actions = [parser.OFPActionOutput(ofproto.OFPP_CONTROLLER)]
+        inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions)]
+        self.add_flow(dp , 60, 1, match , inst)	
+		
     def get_working_set(self, dp):
         dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))	
         working_set = ConfigParser.get_working_set(dir +"/working_set.json")
