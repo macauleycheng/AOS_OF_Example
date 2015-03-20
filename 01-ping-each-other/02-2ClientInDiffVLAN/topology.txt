@@ -1,0 +1,21 @@
+
+(00:e0:00:00:00:01)                           (00:12:cf:01:01:01)
+port1 -----------------  DUT  ----------------port2
+          (00-00-11-33-55) (00-00-00-22-44-66)
+192.168.1.1       (192.168.1.254)       192.168.2.1
+                      (192.168.2.254)
+
+
+DUT2 has two CPU MAC, one for port 1 and another for port 2.
+This is for example, for real world, it almost has same for different L3 interface.
+
+port 1 client is 192.168.1.1
+port 2 client is 192.168.2.1
+
+StartScrtip have implement arp reply for "192.168.1.254" and "192.168.2.254"
+
+NOTE:
+It shall change below SRC MAC according to client
+
+client 1 (00:e0:00:00:00:01) -- port 1 -> group_20010001_port1.json ->eth_dst field
+client 2 (00:12:cf:01:01:01) -- port 2 -> group_20020002_port1.json ->eth_dst field
