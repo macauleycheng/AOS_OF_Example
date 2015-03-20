@@ -1,7 +1,7 @@
 
   Input ---------> Output
          ________
-        |        |   
+P1      |        |   
   VXLAN-+        |
         |        |
         |        |
@@ -13,9 +13,9 @@
         |________|
 
 *
-Input port: VXLAN tunnel id=1
+Input port: P1 (VXLAN tunnel id=1)
 Output Port: P8
 
-
-
+*
+Note: need to configure the switch properly for VXLAN first.
 
