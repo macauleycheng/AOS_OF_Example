@@ -171,7 +171,6 @@ class BridgeTwoPortAuto(app_manager.RyuApp):
         pkt = packet.Packet(msg.data)
         eth = pkt.get_protocols(ethernet.ethernet)[0]
         vlan_h = pkt.get_protocols(vlan.vlan)
-        print vlan_h
         vid=0
         if len(vlan_h) != 0:
             vid = vlan_h[0]
@@ -199,13 +198,6 @@ class BridgeTwoPortAuto(app_manager.RyuApp):
             out_port = self.mac_to_port[dpid][dst]
         else:
             out_port = ofproto.OFPP_FLOOD
-
-        if out_port == 1:
-           actions = [parser.OFPActionGroup(self.l2_intf_p1_group)]
-        elif out_port == 2:
-           actions = [parser.OFPActionGroup(self.l2_intf_p2_group)]		
-        else:
-           actions = [parser.OFPActionGroup(self.l2_flood_group)]
 
         print "out_port %d"%out_port
 			
