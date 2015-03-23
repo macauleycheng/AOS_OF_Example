@@ -1,0 +1,7 @@
+1. 
+AutoBridgeTwoPortUntagAuto.py Use accton_api dynamic add flow and group.
+accton_api is under development, so it may have many changes.
+
+2. 
+BridgeTwoPortAutoUntagged.py write all flow/group on this python file.
+

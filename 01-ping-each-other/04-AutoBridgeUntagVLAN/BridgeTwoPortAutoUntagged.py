@@ -59,8 +59,11 @@ class BridgeTwoPortAuto(app_manager.RyuApp):
         bk2_actions = [parser.OFPActionGroup(self.l2_intf_p2_group)]
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=bk1_actions),
                    parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=bk2_actions)]
+
+        '''
         bk3_actions = [parser.OFPActionGroup(self.l2_intf_p3_group)]
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=bk3_actions)]
+		'''
         self.add_group(datapath, ofproto.OFPGT_ALL, self.l2_flood_group, buckets)
 		
         '''
