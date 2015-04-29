@@ -1,9 +1,10 @@
 from ryu.base import app_manager
 from ryu.controller import ofp_event
-from ryu.controller.handler import CONFIG_DISPATCHER , MAIN_DISPATCHER
+from ryu.controller.handler import CONFIG_DISPATCHER , MAIN_DISPATCHER, HANDSHAKE_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_3
 from ryu.lib import mac
+from ryu import utils
 
 class app_example(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -23,19 +24,10 @@ class app_example(app_manager.RyuApp):
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=actions)]
         self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x00010001, buckets)
         
-        #create l2_mcast_group
+        #create l2_mcast_group, type is all
         actions = [parser.OFPActionGroup(0x00010001)]
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=actions)]
-        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x30010001, buckets)
-        
-        #add bridge flow        
-        actions = [parser.OFPActionGroup(0x00010001)]        
-        inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions),
-                parser.OFPInstructionGotoTable(60)]
-        match = parser.OFPMatch()
-        match.set_vlan_vid(1)
-        match.set_dl_dst(mac.haddr_to_bin"01:00:00:22:44:77"))
-        self.add_flow(datapath ,50 ,1, match , inst)
+        self.add_group(datapath, ofproto.OFPGT_ALL, 0x30010001, buckets)
                 
 		
     @set_ev_cls(ofp_event.EventOFPPacketIn , MAIN_DISPATCHER)

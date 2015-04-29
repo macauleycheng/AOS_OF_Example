@@ -1,9 +1,10 @@
 from ryu.base import app_manager
 from ryu.controller import ofp_event
-from ryu.controller.handler import CONFIG_DISPATCHER , MAIN_DISPATCHER
+from ryu.controller.handler import CONFIG_DISPATCHER , MAIN_DISPATCHER, HANDSHAKE_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_3
 from ryu.lib import mac
+from ryu import utils
 
 class app_example(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -18,25 +19,26 @@ class app_example(app_manager.RyuApp):
         parser = datapath.ofproto_parser	
 		
         self.clearAllFlowsAndGroups(datapath)
+
         #create l2_interface_group, vlan 1 port 1
         actions = [parser.OFPActionOutput(port=1), parser.OFPActionPopVlan()]
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=actions)]
-        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x00010001, buckets)
-        
-        #create l2_mcast_group
-        actions = [parser.OFPActionGroup(0x00010001)]
+        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x00020001, buckets)
+
+        #create l3_unicast_group, type is indirect
+        actions = [parser.OFPActionSetField(vlan_vid=2),parser.OFPActionSetField(eth_dst="00:00:00:00:00:02"),
+                   parser.OFPActionSetField(eth_src="00:00:00:22:44:66"), parser.OFPActionGroup(0x00020001)]
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=actions)]
-        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x30010001, buckets)
-        
+        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x20020002, buckets)
+
         #add bridge flow        
-        actions = [parser.OFPActionGroup(0x00010001)]        
+        actions = [parser.OFPActionGroup(0x20020002)]        
         inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions),
                 parser.OFPInstructionGotoTable(60)]
         match = parser.OFPMatch()
-        match.set_vlan_vid(1)
-        match.set_dl_dst(mac.haddr_to_bin"01:00:00:22:44:77"))
-        self.add_flow(datapath ,50 ,1, match , inst)
-                
+        match.set_dl_type(0x0800)
+        match.set_ipv4_dst(0xc0010101)
+        self.add_flow(datapath ,30 ,1, match , inst)
 		
     @set_ev_cls(ofp_event.EventOFPPacketIn , MAIN_DISPATCHER)
     def _packet_in_handler(self, ev):
