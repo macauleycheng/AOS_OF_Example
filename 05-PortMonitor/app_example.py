@@ -20,25 +20,43 @@ class app_example(app_manager.RyuApp):
 		
         self.clearAllFlowsAndGroups(datapath)
 
-        #create l2_interface_group, vlan 2 port 1
+        #create l2_interface_group, vlan 1 port 1
         actions = [parser.OFPActionOutput(port=1), parser.OFPActionPopVlan()]
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=actions)]
-        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x00020001, buckets)
+        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x00010001, buckets)
 
-        #create l3_unicast_group, type is indirect
-        actions = [parser.OFPActionSetField(vlan_vid=2),parser.OFPActionSetField(eth_dst="00:00:00:00:00:02"),
-                   parser.OFPActionSetField(eth_src="00:00:00:22:44:66"), parser.OFPActionGroup(0x00020001)]
+        #create l2_interface_group, vlan 1 port 2
+        actions = [parser.OFPActionOutput(port=2), parser.OFPActionPopVlan()]
         buckets = [parser.OFPBucket(weight=100, watch_port=0, watch_group=0, actions=actions)]
-        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x20020002, buckets)
+        self.add_group(datapath, ofproto.OFPGT_INDIRECT, 0x00010002, buckets)
 
-        #add bridge flow        
-        actions = [parser.OFPActionGroup(0x20020002)]        
-        inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions),
-                parser.OFPInstructionGotoTable(60)]
+        #add vlan flow for port 1 vlan 1
+        actions = [parser.OFPActionSetField(vlan_vid=1)]
+        inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions),
+                parser.OFPInstructionGotoTable(20)]
         match = parser.OFPMatch()
-        match.set_dl_type(0x0800)
-        match.set_ipv4_dst(0xc0010101)
-        self.add_flow(datapath ,30 ,1, match , inst)
+        match.set_vlan_vid_masked(1, 0x1fff)
+        match.set_in_port(1)
+        self.add_flow(datapath ,10 ,1, match , inst)
+
+        #add vlan flow for port 2 vlan 1
+        actions = [parser.OFPActionSetField(vlan_vid=1)]
+        inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions),
+                parser.OFPInstructionGotoTable(20)]
+        match = parser.OFPMatch()
+        match.set_vlan_vid_masked(1, 0x1fff)
+        match.set_in_port(2)
+        self.add_flow(datapath ,10 ,1, match , inst)
+        
+        #bridge table, let it table miss goto ACL
+        #we doesn't set dlf group, so it won't flood.
+        
+        #add acl flow to monitor port 1 to port 2
+        actions = [parser.OFPActionOutput(2)]        
+        inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions)]
+        match = parser.OFPMatch()
+        match.set_in_port(1)
+        self.add_flow(datapath ,60 ,1, match , inst)
 		
     @set_ev_cls(ofp_event.EventOFPPacketIn , MAIN_DISPATCHER)
     def _packet_in_handler(self, ev):
