@@ -10,6 +10,7 @@
         "mask" : "0",
         "port" : "any",
         "group" : "any",
+        "priority":"10",
         "match":
             {
             "in_port" : "1",
@@ -24,6 +25,7 @@
             "ipv4_src": "10.1.2.1",
             "ipv4_dst": "10.1.1.2",
             "ip_proto": "6",
+            "ip_dscp" : "36",
 
             "tcp_src" : "9999",
             "tcp_dst" : "0"
