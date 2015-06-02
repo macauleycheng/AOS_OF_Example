@@ -24,6 +24,7 @@ Input packets (to port 1)
     VLAN tag priority=2
     SIP=10.1.2.1
     DIP=10.1.1.2
+    IP DSCP=36
     TCP src port=9999
     TCP dest port=0
     
