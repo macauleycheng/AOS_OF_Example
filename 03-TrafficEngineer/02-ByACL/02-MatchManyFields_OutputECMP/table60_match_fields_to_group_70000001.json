@@ -10,6 +10,7 @@
         "mask" : "0",
         "port" : "any",
         "group" : "any",
+        "priority": "10",
         "match":
             {
             "in_port" : "1",
