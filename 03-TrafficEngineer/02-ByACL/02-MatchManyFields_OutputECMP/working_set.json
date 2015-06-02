@@ -19,6 +19,8 @@
 
         "group_70000001_ecmp.json",
 
+        "table20_add_termination_mac.json",
+        "table30_match_dip_mask_to_group_70000001.json",
         "table60_match_fields_to_group_70000001.json"
         ]
 }

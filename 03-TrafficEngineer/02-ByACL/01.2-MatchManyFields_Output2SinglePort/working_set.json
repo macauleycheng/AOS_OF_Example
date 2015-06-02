@@ -1,0 +1,17 @@
+
+{
+    "working_set":
+        [
+        "del_all_flow_table.json",
+        "del_all_group.json",
+
+        "group_b0008_to_port8.json",
+        "group_20000004_set_fields_to_group_b0008.json",
+
+        "table10_add_port1_to_vlan10.json",
+        "table20_add_termination_mac.json",        
+        "table30_match_dip_to_group_20000004.json",
+        "table60_match_fields_to_group_20000004.json"
+        ]
+}
+

@@ -1,0 +1,46 @@
+
+{
+"flow_mod":
+        {
+        "_name" : "add_table30",
+        "_description" :"add_table30",
+        "#comments": "Comments",
+        "table" : "unicast",
+        "cmd" : "add",
+        "mask" : "0",
+        "port" : "any",
+        "group" : "any",
+        "match":
+            {
+            "eth_type" : "0x0800",
+            "ipv4_dst": "10.1.1.2"
+            },
+        "instructions":
+            [
+                {
+                "write":
+                    [
+                        {
+                        "actions":
+                            [
+                            {
+                            "group":
+                                {
+                                "group_id":"0x20000004"
+                                }
+                            }
+                            ]
+                        }
+                    ]
+                },
+                {
+                "goto":
+                    {
+                    "table":"acl"
+                    }
+                }
+                
+            ]
+        }
+}
+
