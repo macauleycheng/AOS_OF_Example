@@ -14,7 +14,7 @@
             {
             "eth_type" : "0x0800",
             "ipv4_dst": "10.1.1.2",
-            "ipv4_dst_mask":"255.255.255.0"
+            "ipv4_dst_mask":"24"
             },
         "instructions":
             [
