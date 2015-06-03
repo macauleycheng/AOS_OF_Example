@@ -104,8 +104,8 @@ class Matches():
 
             elif (key == "ipv4_src_mask"):
                 addr = Matches.ipv4_to_int(config["ipv4_src"])
-                #mask = Matches.mask_ntob(int(val))
-                mask = Matches.ipv4_to_int(val)
+                mask = Matches.mask_ntob(int(val))
+                #mask = Matches.ipv4_to_int(val)
                 matches.set_ipv4_src_masked(addr, mask)
 
             elif (key == "ipv4_dst"):
@@ -113,8 +113,8 @@ class Matches():
 
             elif (key == "ipv4_dst_mask"):
                 addr = Matches.ipv4_to_int(config["ipv4_dst"])
-                #mask = Matches.mask_ntob(int(val))
-                mask = Matches.ipv4_to_int(val)
+                mask = Matches.mask_ntob(int(val))
+                #mask = Matches.ipv4_to_int(val)
                 matches.set_ipv4_dst_masked(addr, mask)
 
             elif (key == "tcp_src"):
