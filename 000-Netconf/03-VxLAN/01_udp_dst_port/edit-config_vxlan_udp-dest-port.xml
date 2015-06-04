@@ -1,0 +1,12 @@
+<edit-config>
+  <target>
+    <running/>
+  </target>
+  <error-option>rollback-on-error</error-option>
+  <config>
+    <capable-switch xmlns="urn:onf:of111:config:yang">
+      <id>capable-switch-1</id>
+      <udp-dest-port xmlns="urn:bcm:ofdpa10:accton01">65535</udp-dest-port>
+    </capable-switch>
+  </config>
+</edit-config>
