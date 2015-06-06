@@ -1,0 +1,23 @@
+
+
+Topology: (Flood by Unicast, by Multiast)
+2: VTEP (VLAN 2)
+1: VTAP (VLAN 1)
+        _____        _____
+PC1---|1_____2|----|2_____1|---PC2
+
+
+Topology: (ECMP group)
+1: VTAP (VLAN 1)
+(2,3,4) ECMP group, VTEP (VLAN 2)
+        _____       _____
+PC1---|1    2|----|2     1|---PC2
+      |     3|----|3      |
+	  |     4|----|4      |
+	  -------      -------
+        
+
+
+
+
+	 
