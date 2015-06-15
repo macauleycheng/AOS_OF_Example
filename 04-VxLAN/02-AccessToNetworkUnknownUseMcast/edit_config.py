@@ -1,3 +1,4 @@
+from ncclient import manager
 import ncclient
 
 
@@ -54,7 +55,7 @@ config_vtap_xml="""
       <id>capable-switch-1</id>
       <resources>
        <port>
-         <resource-id>65537</resource-id>     
+         <resource-id>10001</resource-id>     
            <features>
              <current>
                <rate>10Gb</rate>
@@ -92,7 +93,7 @@ config_vtap_xml="""
             <id>user-input-switch-cpu-mac</id>
             <datapath-id>user-input-switch-cpu-mac</datapath-id>
             <resources>
-              <port>65537</port>
+              <port>10001</port>
             </resources>
           </switch>
       </logical-switches>
@@ -108,7 +109,7 @@ config_vtep_xml="""
       <ofdpa10:udp-dest-port xmlns:ofdpa10="urn:bcm:ofdpa10:accton01">6633</ofdpa10:udp-dest-port>
       <resources>
        <port>
-         <resource-id>65538</resource-id>     
+         <resource-id>10002</resource-id>     
            <features>
              <current>
                <rate>10Gb</rate>
@@ -139,7 +140,7 @@ config_vtep_xml="""
                   <ofdpa10:dest-ip>user-input-dst-ip</ofdpa10:dest-ip>
                   <ofdpa10:udp-src-port>6633</ofdpa10:udp-src-port>
                   <ofdpa10:vni>10</ofdpa10:vni>
-                  <ofdpa10:nexthop-id>10</ofdpa10:nexthop-id>
+                  <ofdpa10:nexthop-id>2</ofdpa10:nexthop-id>
                   <ofdpa10:ttl>25</ofdpa10:ttl>
                 </ofdpa10:vtep>
        </port> 
@@ -149,7 +150,7 @@ config_vtep_xml="""
             <id>user-input-switch-cpu-mac</id>
             <datapath-id>user-input-switch-cpu-mac</datapath-id>
             <resources>
-              <port>65538</port>
+              <port>10002</port>
             </resources>
           </switch>
       </logical-switches>
@@ -158,13 +159,16 @@ config_vtep_xml="""
   """
 
 def replace_vtep_vtap_nexthop(sip, dip, smac, dmac):
-    nexthop_ucast_xml=config_nexthop_ucast_xml("user-input-dst-mac", dmac)
+    global nexthop_ucast_xml
+    nexthop_ucast_xml=config_nexthop_ucast_xml.replace("user-input-dst-mac", dmac)
 	
+    global vtep_xml
     vtep_xml=config_vtep_xml.replace("user-input-switch-cpu-mac", "00:00:"+smac)
     vtep_xml=vtep_xml.replace("user-input-src-ip", sip)
     vtep_xml=vtep_xml.replace("user-input-dst-ip", dip)
 	
-    vtap_xml=config_vtap_xml.replace("user-input-switch-cpu-mac",+"00:00:"+smac)
+    global vtap_xml
+    vtap_xml=config_vtap_xml.replace("user-input-switch-cpu-mac","00:00:"+smac)
     
 
 def send_edit_config(host_ip, username, password):
@@ -216,3 +220,7 @@ def send_edit_config(host_ip, username, password):
 
     	print m.get_config(source='running').data_xml
     
+
+replace_vtep_vtap_nexthop("10.1.1.1", "10.1.2.1", "70:72:cf:dc:9e:da", "70:72:cf:b5:ea:88")
+send_edit_config("192.168.1.1", "netconfuser", "netconfuser")
+
