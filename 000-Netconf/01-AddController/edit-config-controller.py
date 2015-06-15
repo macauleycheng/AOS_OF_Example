@@ -3,8 +3,10 @@ import ncclient
 import xml.etree.ElementTree as ET
 
 host = "192.168.1.1"
-username="root"
-password="root"
+username="netconfuser"
+password="netconfuser"
+#username="root"
+#password="root"
 
 ##NOTE:
 # below two colum shall change to switch CPU MAC
@@ -18,8 +20,8 @@ config_xml="""
       <id>capable-switch-1</id>
         <logical-switches>
           <switch>
-            <id>00:00:70:72:cf:dc:9d:b2</id>
-            <datapath-id>00:00:70:72:cf:dc:9d:b2</datapath-id>
+            <id>00:00:70:72:cf:dc:9e:da</id>
+            <datapath-id>00:00:70:72:cf:dc:9e:da</datapath-id>
             <controllers>
               <controller>
                 <id>192.168.10.105:6633</id>
