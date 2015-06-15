@@ -221,6 +221,6 @@ def send_edit_config(host_ip, username, password):
     	print m.get_config(source='running').data_xml
     
 
-replace_vtep_vtap_nexthop("10.1.1.1", "10.1.2.1", "70:72:cf:dc:9e:da", "70:72:cf:b5:ea:88")
-send_edit_config("192.168.1.1", "netconfuser", "netconfuser")
+#replace_vtep_vtap_nexthop("10.1.1.1", "10.1.2.1", "70:72:cf:dc:9e:da", "70:72:cf:b5:ea:88")
+#send_edit_config("192.168.1.1", "netconfuser", "netconfuser")
 
