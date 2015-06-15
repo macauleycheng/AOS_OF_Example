@@ -1,0 +1,8 @@
+Due to it support NACM and default is enabled, it need use root account to loging.
+So, please set root password on switch first.
+
+Or you can use default user account/password, netconfuser/netconfuser.
+
+To allow yourself craeted user account, please modify the nacm_enable_netconfuser.py.
+
+
