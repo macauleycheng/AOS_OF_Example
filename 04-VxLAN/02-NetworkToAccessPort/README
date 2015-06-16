@@ -1,0 +1,4 @@
+Please refer to 01-AccessToNetworkPort.
+The need part for packet from VTEP to VTAP is that it need add termination flow and vlan flow.
+VLAN flow for passing VLAN filter.
+Terminatin flow for letting packet terminat at this stattion.
