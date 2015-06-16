@@ -3,7 +3,7 @@ from ryu.controller import ofp_event
 from ryu.controller.handler import CONFIG_DISPATCHER , MAIN_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_3
-
+from ryu.lib import mac
 
 class app_example(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -25,7 +25,7 @@ class app_example(app_manager.RyuApp):
         match.set_vlan_vid(1)
         match.set_in_port(2)
         match.set_dl_type(0x0800)
-        match.set_dl_dst("00:00:00:11:33:55")
+        match.set_dl_dst(mac.haddr_to_bin("00:00:00:11:33:55"))
         self.add_flow(datapath ,20 ,1, match , inst)
                 
 		
