@@ -1,0 +1,5 @@
+Beause Ryu already have the ncclient and it version is 0.4.3 but contnet is different as install ncclient.
+So, it better to link ryu/contrib/ncclient to correct ncclient folder
+
+For example:
+/usr/local/lib/python2.7/dist-packages/ryu/contrib# ln -s ../../ncclient ncclient
