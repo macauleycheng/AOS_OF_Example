@@ -1,3 +1,5 @@
+import pkg_resources
+pkg_resources.require("ncclient==0.4.3")
 from ncclient import manager
 import ncclient
 
@@ -5,7 +7,7 @@ import ncclient
 #due to ofconfig design problem, it need fill port feature 
 #but we won't use it currently.
 
-#of-agent nexthop 2 destination 00-00-11-22-33-44 ethernet 1/2 vid 2
+#of-agent nexthop 2 destination user-input-dst-mac ethernet 1/2 vid 2
 config_nexthop_ucast_xml="""
   <config>
       <of11-config:capable-switch xmlns:of11-config="urn:onf:of111:config:yang">
@@ -101,7 +103,7 @@ config_vtap_xml="""
   </config>
   """
   
-#of-agent vtep 10002 source 10.1.2.3 destination 10.1.1.1 udp-source-port 6633 nexthop 2 ttl 25
+#of-agent vtep 10002 source user-input-src-ip destination user-input-dst-ip udp-source-port 6633 nexthop 2 ttl 25
 config_vtep_xml="""
   <config>
     <capable-switch xmlns="urn:onf:of111:config:yang">
@@ -199,7 +201,7 @@ def send_edit_config(host_ip, username, password):
         except Exception as e:
             print "Fail to edit-config config_vni_xml"	
             return -1
-    		
+        		
         try:
             m.edit_config(target='running', 
                           config=vtep_xml, 
