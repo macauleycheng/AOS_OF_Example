@@ -41,8 +41,6 @@ config_vni_xml="""
       <of11-config:capable-switch xmlns:of11-config="urn:onf:of111:config:yang">
         <ofdpa10:vni xmlns:ofdpa10="urn:bcm:ofdpa10:accton01">
           <ofdpa10:id>10</ofdpa10:id>
-          <ofdpa10:vni-multicast-group>224.1.1.1</ofdpa10:vni-multicast-group>
-          <ofdpa10:multicast-group-nexthop-id>20</ofdpa10:multicast-group-nexthop-id>
         </ofdpa10:vni>
       </of11-config:capable-switch>
   </config>
