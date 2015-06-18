@@ -20,20 +20,6 @@ config_nexthop_ucast_xml="""
       </of11-config:capable-switch>
   </config>
   """
-  
-#of-agent nexthop 20 destination 01-00-5e-01-01-01 ethernet 1/2 vid 2
-config_nexthop_mcast_xml="""
-  <config>
-      <of11-config:capable-switch xmlns:of11-config="urn:onf:of111:config:yang">
-        <ofdpa10:next-hop xmlns:ofdpa10="urn:bcm:ofdpa10:accton01">
-          <ofdpa10:id>20</ofdpa10:id>
-          <ofdpa10:dest-mac>01:00:5E:01:01:01</ofdpa10:dest-mac>
-          <ofdpa10:phy-port>2</ofdpa10:phy-port>
-          <ofdpa10:vid>2</ofdpa10:vid>
-        </ofdpa10:next-hop>
-      </of11-config:capable-switch>
-  </config>
-  """
 
 #of-agent vni 10
 config_vni_xml="""
@@ -41,8 +27,6 @@ config_vni_xml="""
       <of11-config:capable-switch xmlns:of11-config="urn:onf:of111:config:yang">
         <ofdpa10:vni xmlns:ofdpa10="urn:bcm:ofdpa10:accton01">
           <ofdpa10:id>10</ofdpa10:id>
-          <ofdpa10:vni-multicast-group>224.1.1.1</ofdpa10:vni-multicast-group>
-          <ofdpa10:multicast-group-nexthop-id>20</ofdpa10:multicast-group-nexthop-id>
         </ofdpa10:vni>
       </of11-config:capable-switch>
   </config>
