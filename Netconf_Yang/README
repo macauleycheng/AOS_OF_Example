@@ -1,0 +1,9 @@
+For Ofconfig, we currently use OFconfig 1.1.1.
+You can use Ofconfig 1.1.1 to setup controller, but for VxLAN part it need use our augment yang file, ofconfig-aug.yang.
+Becaue ofconfig 1.1.1 doesn't consider the encapsulated packet output port, it only provide (SIP, DIP).
+And it also doesn't consider the packet classify for VxLAN tunnel or not for VxLAN tunnel.
+We adapt the OFDPA design first and use ofconfig-aug.yang to configured.
+
+And there is a big bug (I think) in ofconfig 1.1.1, when create logical port, ofconfig 1.1.1 need to fill all node.
+I think it may change in next version. (I ever dicuss this with Netopeer author, he told me he is dicussing with ONF)
+
