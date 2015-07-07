@@ -1,0 +1,5 @@
+1.
+sudo apt-get install python-pip
+sudo apt-get install python-dev libxml2-dev libxslt-dev libz-dev
+2.
+sudo pip install ncclient
