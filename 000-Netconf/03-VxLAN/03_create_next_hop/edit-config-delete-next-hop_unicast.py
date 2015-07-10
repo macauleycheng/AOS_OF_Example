@@ -3,17 +3,21 @@ import ncclient
 import xml.etree.ElementTree as ET
 
 host = "192.168.1.1"
-username="root"
-password="root"
+username="netconfuser"
+password="netconfuser"
 
            
 config_xml="""
   <config>
-      <of11-config:capable-switch xmlns:of11-config="urn:onf:of111:config:yang">
-        <ofdpa10:next-hop xmlns:ofdpa10="urn:bcm:ofdpa10:accton01">
+    <capable-switch
+    xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0"
+    xmlns="urn:onf:of111:config:yang">
+        <ofdpa10:next-hop
+        xc:operation="delete"
+        xmlns:ofdpa10="urn:bcm:ofdpa10:accton01">
           <ofdpa10:id>20</ofdpa10:id>
         </ofdpa10:next-hop>
-      </of11-config:capable-switch>
+    </capable-switch>
   </config>
   """
   
