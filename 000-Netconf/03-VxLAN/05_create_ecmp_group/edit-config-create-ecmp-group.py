@@ -3,8 +3,8 @@ import ncclient
 import xml.etree.ElementTree as ET
 
 host = "192.168.1.1"
-username="root"
-password="root"
+username="netconfuser"
+password="netconfuser"
 
 config_next_hop_xml="""
   <config>
