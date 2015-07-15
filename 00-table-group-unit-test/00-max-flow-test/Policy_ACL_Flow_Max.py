@@ -10,9 +10,9 @@ import ipaddr
 
 match_ip_start=ipaddr.IPAddress('2.0.0.1')
 match_ipv6_start=[0x2000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001]
-v4_entry_num=1280
-v6_entry_num=1280
-sleep_time=1
+v4_entry_num=1286
+v6_entry_num=1286
+sleep_time=0.1
 
 def change_mac(mac, offset):
     new_mac="{:012X}".format(int(mac, 16) + offset)
@@ -63,7 +63,7 @@ class PolicAclFlowMaxTest(app_manager.RyuApp):
        ofproto = datapath.ofproto
        parser = datapath.ofproto_parser
        mod = parser.OFPFlowMod(datapath=datapath, command=ofproto.OFPFC_DELETE, table_id=table_id, priority=priority,
-	                           out_port=ofproto.OFPP_ANY, out_group=ofproto.OFPG_ANY,
+                             out_port=ofproto.OFPP_ANY, out_group=ofproto.OFPG_ANY,
                                match=match , instructions=inst)
        datapath.send_msg(mod)
 
@@ -85,15 +85,6 @@ class PolicAclFlowMaxTest(app_manager.RyuApp):
 
         # create full ucast bridge flow
         print 'Start to test full policy acl flow'
-        for i in range(0, v4_entry_num, 1):
-            actions = [parser.OFPActionGroup(l2_intf_group_id)]
-            inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions)]
-            match = parser.OFPMatch()
-            match.set_dl_type(0x0800)
-            match.set_ipv4_dst( (match_ip_start + i))
-            self.add_flow(datapath ,60 ,1, match , inst)
-            time.sleep(sleep_time)
-
         for i in range(0, v6_entry_num, 1):
             actions = [parser.OFPActionGroup(l2_intf_group_id)]
             inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions)]
@@ -103,6 +94,26 @@ class PolicAclFlowMaxTest(app_manager.RyuApp):
             self.add_flow(datapath ,60 ,1, match , inst)
             time.sleep(sleep_time)
             match_ipv6_start[7] += 1
+
+        for i in range(0, v6_entry_num, 1):
+            actions = [parser.OFPActionGroup(l2_intf_group_id)]
+            inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions)]
+            match = parser.OFPMatch()
+            match.set_dl_type(0x86dd)
+            match.set_ipv6_src(match_ipv6_start)
+            self.add_flow(datapath ,60 ,1, match , inst)
+            time.sleep(sleep_time)
+            match_ipv6_start[7] += 1
+
+        for i in range(0, v4_entry_num, 1):
+            actions = [parser.OFPActionGroup(l2_intf_group_id)]
+            inst = [parser.OFPInstructionActions(ofproto.OFPIT_WRITE_ACTIONS, actions)]
+            match = parser.OFPMatch()
+            match.set_dl_type(0x0800)
+            match.set_ipv4_dst( (match_ip_start + i))
+            self.add_flow(datapath ,60 ,1, match , inst)
+            time.sleep(sleep_time)
+
         print 'Finish to full policy acl flow testing'
 
 
@@ -116,7 +127,7 @@ class PolicAclFlowMaxTest(app_manager.RyuApp):
         req = ofp_parser.OFPFlowStatsRequest(datapath=datapath, flags=0,
                                              table_id=ofp.OFPTT_ALL,
                                              out_port=ofp.OFPP_ANY,
-	                                         out_group=ofp.OFPG_ANY,
+                                           out_group=ofp.OFPG_ANY,
                                              cookie=cookie, cookie_mask=cookie_mask,
                                              match=None)
         datapath.send_msg(req)
