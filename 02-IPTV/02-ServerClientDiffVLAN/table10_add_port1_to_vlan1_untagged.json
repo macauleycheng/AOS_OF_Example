@@ -13,7 +13,7 @@
         "match":
             {
             "in_port" : "1",
-            "vlan_vid": "0, 0x0fff"
+            "vlan_vid": "0"
             },
         "instructions":
             [
