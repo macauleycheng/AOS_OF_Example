@@ -79,7 +79,10 @@ class Matches():
                 lst = val.split(',')
                 if(len(lst) == 1):
                     vlan_vid = Utils.to_int(lst[0])
-                    matches.set_vlan_vid(vlan_vid)
+                    if (vlan_vid == 0):
+                        matches.set_vlan_vid_none()
+                    else:
+                        matches.set_vlan_vid(vlan_vid)
                 elif(len(lst) == 2):
                     vlan_vid = Utils.to_int(lst[0])
                     vlan_vid_mask = Utils.to_int(lst[1])
