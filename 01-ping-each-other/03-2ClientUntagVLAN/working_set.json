@@ -7,10 +7,10 @@
 		"group_10001_to_port1.json",
 		"group_10002_to_port2.json",
 		"group_40010001_l2_flood.json",
-		"table10_add_port1_to_vlan1_untagged.json",
-		"table10_add_port2_to_vlan1_untagged.json",
 		"table10_add_port1_to_vlan1_tagged.json",
-		"table10_add_port2_to_vlan1_tagged.json",		
+		"table10_add_port2_to_vlan1_tagged.json",
+		"table10_add_port1_to_vlan1_untagged.json",
+		"table10_add_port2_to_vlan1_untagged.json",		
 		"table50_add_client1_on_port1.json",
 		"table50_add_client2_on_port2. json",
 		"table50_flood_bcast. json"
